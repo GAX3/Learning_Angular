@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-2d923": {
+      "hosting": {
+        "ABlog": [
+          "angular-2d923"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-2d923"
+  }
+}

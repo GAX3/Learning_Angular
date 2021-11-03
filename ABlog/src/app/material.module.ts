@@ -9,6 +9,11 @@ import { MatIconModule} from "@angular/material/icon";
 import { MatSidenavModule} from "@angular/material/sidenav";
 import { MatListModule} from "@angular/material/list";
 
+import { RouterModule} from "@angular/router";
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule} from '@angular/material/chips';
+
 
 const myModule = [
   MatCardModule,
@@ -17,12 +22,17 @@ const myModule = [
   MatToolbarModule,
   MatIconModule,
   MatSidenavModule,
-  MatListModule
+  MatListModule,
+  MatProgressSpinnerModule,
+  MatDividerModule,
+  MatChipsModule
 ]
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, myModule ],
+  declarations: [
+
+  ],
+  imports: [CommonModule, myModule, RouterModule],
   exports: [myModule,]
 })
 export class MaterialModule { }
