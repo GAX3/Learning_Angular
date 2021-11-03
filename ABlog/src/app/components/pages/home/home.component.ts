@@ -9,14 +9,16 @@ import {Observable} from "rxjs";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
- 
-  public posts$ : Observable<PostI[]> | undefined;
 
+export class HomeComponent implements OnInit {
+
+  public posts$!: Observable<PostI[]>;
+  
   constructor(private postSvc: PostService) { }
 
   ngOnInit(): void {
-     this.posts$ = this.postSvc.getAllPosts();
+    
+    this.posts$ = this.postSvc.getAllPosts();
   }
 
 }

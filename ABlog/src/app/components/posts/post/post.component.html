@@ -1,13 +1,18 @@
-<<div class="container">
+<div class="container" *ngFor="let post of objeto">
   <mat-card class="post-card">
-    <img matCardImage class="align-center"[src]="post.imagePost">
+    <img matCardImage class="align-center" [src]="post.imagePost" />
     <mat-card-content>
       <mat-card-title>
-          {{post.titlePost}}
+        {{post.titlePost}}
       </mat-card-title>
       <p class="content">
         {{post.contentPost}}
       </p>
     </mat-card-content>
   </mat-card>
+</div>
+
+<ng-template #loading>
+  <div class="container-spinner">
+    <mat-spinner> </mat-spinner>
 </div>
