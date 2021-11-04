@@ -14,7 +14,6 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 export class PostService {
   private postsCollection: AngularFirestoreCollection<PostI>;
   
-
   constructor(
     private afs: AngularFirestore
     ) {

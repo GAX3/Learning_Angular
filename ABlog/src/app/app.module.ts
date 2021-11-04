@@ -11,6 +11,7 @@ import { MaterialModule } from './material.module';
 import { ToolbarComponent} from "./shared/components/toolbar/toolbar.component";
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
+import { ReactiveFormsModule } from '@angular/forms';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
@@ -20,9 +21,14 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import { AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { BUCKET } from "@angular/fire/compat/storage";
-import  { AngularFireStorage} from "@angular/fire/compat/storage";
+import { AngularFireStorage } from "@angular/fire/compat/storage";
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
+
 
 import { AngularFireModule} from "@angular/fire/compat";
+
+import { MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -41,17 +47,20 @@ import { AngularFireModule} from "@angular/fire/compat";
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     AngularFireStorageModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    
 
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())
-
-
-
+    
   ],
+
   providers: [
     {provide: BUCKET, useValue:'gs://angular-2d923.appspot.com'}
   ],
