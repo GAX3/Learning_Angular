@@ -32,13 +32,15 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import { ContainerAppComponent } from './components/pages/container-app/container-app.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     NewPostComponent,
     PostComponent,
     ToolbarComponent,
-    ContainerAppComponent
+    ContainerAppComponent,
+    
   ],
   imports: [
     BrowserModule,
