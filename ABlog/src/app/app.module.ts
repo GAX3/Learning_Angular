@@ -30,6 +30,7 @@ import { AngularFireModule} from "@angular/fire/compat";
 
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { ContainerAppComponent } from './components/pages/container-app/container-app.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
 
 
@@ -40,6 +41,7 @@ import { ContainerAppComponent } from './components/pages/container-app/containe
     PostComponent,
     ToolbarComponent,
     ContainerAppComponent,
+    ModalComponent,
     
   ],
   imports: [
@@ -64,7 +66,7 @@ import { ContainerAppComponent } from './components/pages/container-app/containe
     provideStorage(() => getStorage())
     
   ],
-
+  entryComponents: [ModalComponent],
   providers: [
     {provide: BUCKET, useValue:'gs://angular-2d923.appspot.com'}
   ],

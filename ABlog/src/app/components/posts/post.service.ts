@@ -17,7 +17,7 @@ export class PostService {
   constructor(
     private afs: AngularFirestore
     ) {
-      this.postsCollection = afs.collection('posts');    
+      this.postsCollection = afs.collection<PostI>('posts');    
     }
 
     public getAllPosts():Observable<PostI[]>{
@@ -37,6 +37,15 @@ export class PostService {
      const db= getFirestore();
      const querySnapshot = await getDoc(doc(db, 'posts', `${id}`));
      return querySnapshot.data()
+   }
+
+   public deletePostById(post:PostI){
+     return this.postsCollection.doc(post.id).delete();
+   }
+
+
+   public editPostById(post: PostI){
+     return this,this.postsCollection.doc(post.id).update(post);
    }
 
     
