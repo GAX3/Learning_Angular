@@ -5,3 +5,31 @@ table {
 th.mat-sort-header-sorted {
   color: black;
 }
+
+.button-warn{
+  color: red;
+}
+
+
+.mat-form-field{
+  font-size: 1 rem;
+  width: 98%;
+  margin: 0 auto;
+  display: block;
+  margin-top: 1 rem;
+}
+
+.container-btn-new{
+  display:flex;
+  justify-content: flex-end;
+  width: 100%;
+  
+  margin: 1 rem -0.6rem;
+  button{
+    width: 10%;
+    
+    color:#fff;
+    background-color: #451e89;
+    cursor: pointer;
+  }
+}
