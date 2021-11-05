@@ -29,6 +29,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule} from "@angular/fire/compat";
 
 import { MatFormFieldModule} from '@angular/material/form-field';
+import { ContainerAppComponent } from './components/pages/container-app/container-app.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MatFormFieldModule} from '@angular/material/form-field';
     AppComponent,
     NewPostComponent,
     PostComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ContainerAppComponent
   ],
   imports: [
     BrowserModule,
