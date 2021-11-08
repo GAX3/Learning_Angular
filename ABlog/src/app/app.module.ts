@@ -23,14 +23,11 @@ import { AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { BUCKET } from "@angular/fire/compat/storage";
 import { AngularFireStorage } from "@angular/fire/compat/storage";
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-
-
-
 import { AngularFireModule} from "@angular/fire/compat";
-
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { ContainerAppComponent } from './components/pages/container-app/container-app.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -56,6 +53,7 @@ import { ModalComponent } from './shared/components/modal/modal.component';
     AngularFireAuthModule,
     AngularFireStorageModule,
     MatFormFieldModule,
+    MatInputModule,
     ReactiveFormsModule,
     
 

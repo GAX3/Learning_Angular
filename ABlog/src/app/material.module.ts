@@ -15,9 +15,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule} from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule} from '@angular/material/form-field';
+
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule} from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 
 const myModule = [
@@ -35,7 +37,10 @@ const myModule = [
   MatFormFieldModule,
   MatPaginatorModule,
   MatSortModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSelectModule,
+  
+
   
 ]
 
