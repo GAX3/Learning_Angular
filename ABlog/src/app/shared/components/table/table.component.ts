@@ -17,7 +17,7 @@ import { ModalComponent } from '../modal/modal.component';
 })
 
 export class TableComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['titlePost', 'tagsPost', 'actions'];
+  displayedColumns: string[] = ['id','titlePost', 'tagsPost', 'actions'];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator, {static: true})  paginator!: MatPaginator;
@@ -33,14 +33,9 @@ export class TableComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
-  onEditPost(post: PostI){
-    console.log('Delete post', post);
-    console.log('Title: ', post.titlePost);
-    
-  }
   
   onDeletePost(post: PostI){
+    console.log('ID', post.id);   
     console.log('Title: ', post.titlePost);
 
     Swal.fire({
@@ -55,7 +50,7 @@ export class TableComponent implements OnInit, AfterViewInit {
         console.log(result);
         if(result.value){
            this.postSvc.deletePostById(post).then(() => {
-            Swal.fire('Deleted!', 'YOur post has been deleted.', 'success');
+            Swal.fire('Deleted!', 'Your post has been deleted.', 'success');
            }).catch((error) =>{
              Swal.fire('Error!', 'There was a error deleting this post', 'error');
            });
@@ -69,16 +64,55 @@ export class TableComponent implements OnInit, AfterViewInit {
     this.openDialog();
   }
 
-  openDialog():void{
-    const dialogRef = this.dialog.open(ModalComponent);
-    dialogRef.afterClosed().subscribe(result =>{
-      console.log(`Dialog result ${result}`);
-      
-    })
+  onEditPost(post: PostI){
+    //Test Console helps to watch proccess
+    //this.consoleTest(post);
+    console.log('Edit post:: ', post);
+        
+    this.openDialog(post);
 
   }
 
+  onTest(post: PostI){
+    console.log("");
+    console.log('ID: ', post.id);
+    console.log('Title: ', post.titlePost);
+    console.log('Content: ', post.contentPost);
+    console.log('Tags: ', post.tagsPost);
+    console.log('Image: ', post.imagePost);
+    console.log("");
+    
+  }
 
+  consoleTest(post: PostI){
+    console.log('Edit Post', post  );
+    console.log('IMAGE', post.imagePost);
+    let imageO = post.imagePost;
+    console.log('imageO', imageO);
 
+    let imageSub = imageO.substring(8, (imageO.length-1));
+    post.imagePost = imageSub;
+    console.log("PI: ", post.imagePost);
+  }
 
+  openDialog(post?: PostI):void{
+    console.log("Open Dialog");
+  
+    const config ={
+      data:{
+      message: post ? 'Edit Post' : 'New Post',
+      content: post
+    }
+  };
+  
+  console.log("Method: ", config.data.message);
+  
+    const dialogRef = this.dialog.open(ModalComponent, config);
+    dialogRef.afterClosed().subscribe(result =>{
+      console.log(`Dialog result ${result}`);
+      
+    });
+
+  }
+  
 }

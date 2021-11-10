@@ -4,7 +4,7 @@ import { PostI } from 'src/app/shared/models/post.interface';
 import { PostService } from '../post.service';
 
 @Component({
-  selector: 'new-post',
+  selector: 'app-new-post',
   templateUrl: './new-post.component.html',
   styleUrls: ['./new-post.component.scss']
 })
@@ -16,7 +16,6 @@ export class NewPostComponent implements OnInit {
     titlePost: new FormControl('', Validators.required),
     contentPost: new FormControl('',Validators.required),
     tagsPost: new FormControl('', Validators.required),
-    
     imagePost: new FormControl('', Validators.required),
   });
 
@@ -35,8 +34,6 @@ export class NewPostComponent implements OnInit {
   handleImage(event: any):void{
     this.image= event.target.files[0];
     console.log('Image', this.image);
-    
-
   }
 
 }

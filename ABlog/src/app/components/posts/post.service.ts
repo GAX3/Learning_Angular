@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "@angular/fire/compat/firestore";
 import { Observable} from "rxjs";
 import { map, finalize } from 'rxjs/operators';
 import { PostI } from "../../shared/models/post.interface";
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import { doc, getDoc, getFirestore, setDoc, collection} from 'firebase/firestore';
 import { FileI } from 'src/app/shared/models/file.interface';
+import { update } from '@firebase/database';
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class PostService {
   private postsCollection: AngularFirestoreCollection<PostI>;
   private filePath: any;
   private dowloadURL!: Observable<string>;
-  
+
   constructor(
     private afs: AngularFirestore,
     private storage: AngularFireStorage
@@ -47,16 +48,23 @@ export class PostService {
      return this.postsCollection.doc(post.id).delete();
    }
 
-
-   public editPostById(post: PostI){
-     return this,this.postsCollection.doc(post.id).update(post);
+   public updatePostById(post: PostI){
+    const db= getFirestore();
    }
+
+
+
+   public editPostById(post: PostI) {
+    return this.postsCollection.doc(post.id).update(post);  
+  }
 
    public preAddAndUpdatePost(post: PostI, image: FileI): void{
       this.uploadImage(post, image);
    }
 
-   private savePost(post: PostI){
+   public savePost(post: PostI){
+    console.log('PostSvc', post);
+
     const postObj ={
         titlePost: post.titlePost,
         contentPost: post.contentPost,
@@ -64,16 +72,31 @@ export class PostService {
         fileRef: this.filePath,
         tagsPost: post.tagsPost
     };
+       
+      if(post.id){
+        console.log("TRUE");
+        
+        return this.postsCollection.doc(post.id).update(postObj);
+      }else{
       // Todo edit
-      
-      this.postsCollection.add(postObj);
-      console.log('Post Register', postObj );
-      
+      console.log("False");      
+      return this.postsCollection.add(postObj); 
+     
+    }
    }
 
 
-   private uploadImage(post: PostI, image:FileI){
+   public uploadImage(post: PostI, image:FileI){
+    let options = "";
+    
+    if(post.id){
+      options = 'edit';
+    }else{
+      options = 'add';
+    }
+
       this.filePath = `images/${image.name}`;
+      console.log("File Path", this.filePath)
       const fileRef = this.storage.ref(this.filePath);
       const task = this.storage.upload(this.filePath, image);
       task.snapshotChanges()
@@ -83,6 +106,8 @@ export class PostService {
             this.dowloadURL = urlImage;
             console.log('URL_IMAGE', urlImage);
             console.log('POST', post);
+            
+            
             //CALL addPost();
             this.savePost(post);
             

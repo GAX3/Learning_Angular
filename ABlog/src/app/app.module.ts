@@ -28,6 +28,8 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import { ContainerAppComponent } from './components/pages/container-app/container-app.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { MatInputModule } from '@angular/material/input';
+import { EditPostComponent } from './components/posts/edit-post/edit-post.component';
+import { EditPostModule } from './components/posts/edit-post/edit-post.module';
 
 
 
@@ -39,6 +41,7 @@ import { MatInputModule } from '@angular/material/input';
     ToolbarComponent,
     ContainerAppComponent,
     ModalComponent,
+    EditPostComponent,
     
   ],
   imports: [
@@ -61,7 +64,8 @@ import { MatInputModule } from '@angular/material/input';
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    EditPostModule
     
   ],
   entryComponents: [ModalComponent],
