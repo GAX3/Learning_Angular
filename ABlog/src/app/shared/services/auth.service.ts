@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { UserI } from '../models/user.interface';
+import { FileI } from '../models/file.interface';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { Observable } from 'rxjs';
 import { getAuth, onAuthStateChanged, signOut, User, updateProfile } from 'firebase/auth';
 import { FirebaseApp } from '@angular/fire/app';
 import * as firebase from 'firebase/compat';
 import { updateCurrentUser } from '@firebase/auth';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs/operators';
 
 
 @Injectable({
@@ -14,9 +17,10 @@ import { updateCurrentUser } from '@firebase/auth';
 
 export class AuthService {
   public user!:User | null;
+  private filePath!: string;
   
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(private afAuth: AngularFireAuth, private storage: AngularFireStorage) {
 
     this.afAuth.onAuthStateChanged((user) => {
       console.log('USER: ', user);
@@ -78,10 +82,36 @@ export class AuthService {
 
   //* Save User profile
 
+  preSaveUserProfile(user: UserI, image: FileI): void{
+    
+    if(image){
+      this.uploadImage(user, image);
+    }else{
+      this.saveUserProfile(user);
+    }
+  }
 
-  saveUserProfile(user: UserI) {
+  private uploadImage(user: UserI, image: FileI): void{
+    this.filePath = `images/${image.name}`;
+    const fileRef = this.storage.ref(this.filePath);
+    const task = this.storage.upload(this.filePath, image);
+    task.snapshotChanges()
+    .pipe(
+      finalize (() => {
+        fileRef.getDownloadURL().subscribe(urlImage =>{
+          user.photoURL = urlImage;
+          this.saveUserProfile(user);
+        });
+      })
+    ).subscribe();
+
+  }
+
+  private saveUserProfile(user: UserI) {
     return updateProfile(this.user!,{ displayName: user.displayName, photoURL: user.photoURL});
   }
+
+
 
 
 }

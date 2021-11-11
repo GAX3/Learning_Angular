@@ -48,11 +48,6 @@ export class PostService {
      return this.postsCollection.doc(post.id).delete();
    }
 
-   public updatePostById(post: PostI){
-    const db= getFirestore();
-   }
-
-
 
    public editPostById(post: PostI) {
     return this.postsCollection.doc(post.id).update(post);  

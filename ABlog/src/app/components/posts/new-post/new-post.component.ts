@@ -19,8 +19,6 @@ export class NewPostComponent implements OnInit {
     imagePost: new FormControl('', Validators.required),
   });
 
-
-
   ngOnInit(): void {
   }
 

@@ -31,8 +31,9 @@ export class ProfileComponent implements OnInit {
 
   onSaveUser(user: UserI): void {
     console.log("onSaveUSER: ", user);
+    //this.authSvc.saveUserProfile(user, this.image);
+    this.authSvc.preSaveUserProfile(user, this.image);
 
-    this.authSvc.saveUserProfile(user);
   }
 
   private initValuesForm(user: UserI): void{
@@ -45,8 +46,12 @@ export class ProfileComponent implements OnInit {
     this.profileForm.patchValue({
       displayName: user.displayName,
       email: user.email,
-      photoURL: user.photoURL,
     })
+  }
+
+  handleImage(event: any):void{
+    this.image= event.target.files[0];
+
   }
 
 }
