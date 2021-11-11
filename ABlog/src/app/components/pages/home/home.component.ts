@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from "../../posts/post.service";
-import { PostI } from "../../../shared/models/post.interface";
-import {Observable} from "rxjs";
+import { Observable } from 'rxjs';
+import { PostI } from 'src/app/shared/models/post.interface';
+import { PostService } from '../../posts/post.service';
 
 
 @Component({
@@ -11,14 +11,14 @@ import {Observable} from "rxjs";
 })
 
 export class HomeComponent implements OnInit {
+  public posts$: Observable<PostI[]> | undefined;
 
-  public posts$!: Observable<PostI[]>;
+  constructor(private postSvc: PostService){}
   
-  constructor(private postSvc: PostService) { }
-
   ngOnInit(): void {
-    
     this.posts$ = this.postSvc.getAllPosts();
   }
+
+  
 
 }

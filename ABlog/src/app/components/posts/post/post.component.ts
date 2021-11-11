@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute} from "@angular/router";
 import { Observable } from 'rxjs';
 import { PostI } from 'src/app/shared/models/post.interface';
 import { PostService } from '../post.service';
+
+
+
 
 @Component({
   selector: 'app-post',
@@ -11,21 +14,17 @@ import { PostService } from '../post.service';
 })
 
 export class PostComponent implements OnInit {
-  objeto:PostI[]= [];
-  datos:any[]=[];
-  show:boolean = false;
+  //public posts$!: Observable<PostI[]>;
+  
+  @Input()  post!: PostI;
 
-  constructor(private route: ActivatedRoute, private postSvc: PostService) { }
+  constructor(private postSvc: PostService) { }
 
-  async ngOnInit() {
-      const idPost = this.route.snapshot.params.id;
-      this.datos.push(await this.postSvc.getOnePost(idPost).then(y => y));
-      this.objeto = this.datos;
-      if(this.objeto){
-        this.show = true;
-      }
+  ngOnInit(): void {
+    //this.posts$ = this.postSvc.getAllPosts();
+
+
   }
-
 
 }
 
