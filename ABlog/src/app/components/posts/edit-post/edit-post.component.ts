@@ -43,8 +43,7 @@ export class EditPostComponent implements OnInit {
       //Call Method (post)
       this.postSvc.editPostById(post);
     }else{
-      //call method (post, this.image)
-      
+      //call method (post, this.image)  
       this.postSvc.uploadImage(post, this.image);
     }
   }

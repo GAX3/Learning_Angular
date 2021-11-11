@@ -15,6 +15,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule} from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldControl } from '@angular/material/form-field';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -39,8 +40,6 @@ const myModule = [
   MatSortModule,
   MatDialogModule,
   MatSelectModule,
-  
-
   
 ]
 

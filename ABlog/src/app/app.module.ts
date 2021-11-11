@@ -30,7 +30,7 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { MatInputModule } from '@angular/material/input';
 import { EditPostComponent } from './components/posts/edit-post/edit-post.component';
 import { EditPostModule } from './components/posts/edit-post/edit-post.module';
-
+import { MatFormFieldControl } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -42,6 +42,7 @@ import { EditPostModule } from './components/posts/edit-post/edit-post.module';
     ContainerAppComponent,
     ModalComponent,
     EditPostComponent,
+    
     
   ],
   imports: [

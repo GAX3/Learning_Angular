@@ -74,12 +74,11 @@ export class PostService {
     };
        
       if(post.id){
-        console.log("TRUE");
-        
+        console.log("TRUE : IF");
         return this.postsCollection.doc(post.id).update(postObj);
       }else{
       // Todo edit
-      console.log("False");      
+      console.log("FALSE : ELSE");      
       return this.postsCollection.add(postObj); 
      
     }
@@ -106,8 +105,6 @@ export class PostService {
             this.dowloadURL = urlImage;
             console.log('URL_IMAGE', urlImage);
             console.log('POST', post);
-            
-            
             //CALL addPost();
             this.savePost(post);
             

@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserI } from 'src/app/shared/models/user.interface';
 import { FormGroup, FormControl, Validators}  from '@angular/forms';
 import { Router } from '@angular/router';
+import { user } from 'rxfire/auth';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
     this.authSvc
         .loginByEmail(form)
         .then(res =>{
-          console.log('successfully', res);
+          console.log('successfully', res , form);
           this.route.navigate(['/']);
         })
         .catch(err => console.log('Error', err));
