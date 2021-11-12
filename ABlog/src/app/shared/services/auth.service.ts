@@ -17,7 +17,8 @@ import { finalize } from 'rxjs/operators';
 
 export class AuthService {
   public user!:User | null;
-  private filePath!: string;
+  private filePath: any;
+  private dowloadURL!: Observable<string>;
   
 
   constructor(private afAuth: AngularFireAuth, private storage: AngularFireStorage) {
@@ -31,7 +32,7 @@ export class AuthService {
         this.user = null;
       }
     })
-  }
+}
 
   getUser(){
     return new Promise<void>((resolve, reject) => {
@@ -51,17 +52,28 @@ export class AuthService {
     const { email, password } = user;
     const result = await this.afAuth.signInWithEmailAndPassword(email, password!)
     const auth = getAuth();
-    
     onAuthStateChanged(auth, (user) => {
       console.log('USER: ', user);
       if(user){
         this.user = user;
-        
+        this.estadoOn();
       }else{
         this.user = null;
       }
     })
     return result;
+  }
+
+  estadoOn(){
+    localStorage.setItem("Estado", "true");
+    let estado = localStorage.getItem("Estado");
+    console.log("Estado: ", estado);
+  }
+
+  estadoOff(){
+    localStorage.setItem("Estado", "false");
+    let estado = localStorage.getItem("Estado");
+    console.log("Estado: ", estado);
   }
 
   logout(){
@@ -74,16 +86,18 @@ export class AuthService {
       console.log('USER 2: ', user);
       if(user){
         this.user = user;
+        this.estadoOff();
       }else{
         this.user = null;
       }
     })
   }
 
-  //* Save User profile
 
-  preSaveUserProfile(user: UserI, image: FileI): void{
-    
+  
+
+  //* Save User profile
+  preSaveUserProfile(user: UserI, image?: FileI): void{
     if(image){
       this.uploadImage(user, image);
     }else{
@@ -91,7 +105,7 @@ export class AuthService {
     }
   }
 
-  private uploadImage(user: UserI, image: FileI): void{
+  public uploadImage(user: UserI, image: FileI): void{
     this.filePath = `images/${image.name}`;
     const fileRef = this.storage.ref(this.filePath);
     const task = this.storage.upload(this.filePath, image);
@@ -107,13 +121,13 @@ export class AuthService {
 
   }
 
-  private saveUserProfile(user: UserI) {
-    return updateProfile(this.user!,{ displayName: user.displayName, photoURL: user.photoURL});
+  public saveUserProfile(user: UserI) {
+    console.log("Save User Profile");
+    return updateProfile(this.user!,{ displayName: user.displayName, photoURL: user.photoURL})
+    .then(() => console.log('User Update', this.user))
+    .catch(err => console.log('Error ', err));
+    
   }
-
-
-
-
 }
 
 

@@ -90,7 +90,7 @@ export class PostService {
     }
 
       this.filePath = `images/${image.name}`;
-      console.log("File Path", this.filePath)
+      
       const fileRef = this.storage.ref(this.filePath);
       const task = this.storage.upload(this.filePath, image);
       task.snapshotChanges()
@@ -98,6 +98,7 @@ export class PostService {
         finalize(() => {
           fileRef.getDownloadURL().subscribe( urlImage => {
             this.dowloadURL = urlImage;
+            
             console.log('URL_IMAGE', urlImage);
             console.log('POST', post);
             //CALL addPost();
